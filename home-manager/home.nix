@@ -24,6 +24,7 @@
     ripgrep
     sxiv
     thunderbird
+    unzip
   ];
 
   # Append to PATH
@@ -43,6 +44,21 @@
     "nvim/ftplugin".source = ./nvim/ftplugin;
   };
 
+  # Set XDG directories
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+
+    desktop = "${config.home.homeDirectory}";
+    download = "${config.home.homeDirectory}/dls";
+    templates = "${config.home.homeDirectory}";
+    publicShare = "${config.home.homeDirectory}";
+    documents = "${config.home.homeDirectory}/docs";
+    music = "${config.home.homeDirectory}";
+    pictures = "${config.home.homeDirectory}/img";
+    videos = "${config.home.homeDirectory}/img";
+  };
+
   # Write to dconf configuration system for GNOME
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
@@ -52,6 +68,9 @@
       color-scheme = "prefer-dark";
     };
   };
+
+  # Enable systemd services
+  services.syncthing.enable = true;
 
   # Allow font configuration
   fonts.fontconfig.enable = true;
