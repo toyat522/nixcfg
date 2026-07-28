@@ -7,41 +7,114 @@
   # Home Manager release that is compatible with this configuration
   home.stateVersion = "26.05";
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # Install Nix packages into the environment
   home.packages = with pkgs; [
     bat
+    claude-code
     eza
-    neovim
+    fastfetch
+    fd
+    htop
+    nerd-fonts.fira-mono
+    obsidian
+    ranger
     ripgrep
-    tmux
+    sxiv
+    thunderbird
   ];
-
-  # Manage dotfiles
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
 
   # Append to PATH
   home.sessionPath = [ "$HOME/.local/bin" ];
 
   # Manage environment variables
-  home.sessionVariables = {
-    EDITOR = "nvim";
+  home.sessionVariables = { };
+
+  # Create symlinks to ~/
+  home.file = {
+  };
+
+  # Create symlinks to ~/.config
+  xdg.configFile = {
+    "nvim/init.lua".source = ./nvim/init.lua;
+    "nvim/lua".source = ./nvim/lua;
+    "nvim/ftplugin".source = ./nvim/ftplugin;
   };
 
   # Write to dconf configuration system for GNOME
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       xkb-options = [ "caps:swapescape" ];
+    };
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  # Allow font configuration
+  fonts.fontconfig.enable = true;
+
+  programs.home-manager.enable = true;
+
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    keyMode = "vi";
+    mouse = true;
+    historyLimit = 9999999;
+    escapeTime = 0;
+    extraConfig = ''
+      # Split panes using 's' and 'v'
+      bind v split-window -h
+      bind s split-window -v
+
+      # Switch panes using hjkl
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+
+      # Copy to system clipboard
+      bind -T copy-mode-vi V send-keys -X begin-selection
+      bind -T copy-mode-vi Y send-keys -X copy-pipe-and-cancel "wl-copy"
+
+      # Don't scroll all the way down on copy
+      unbind-key -T copy-mode-vi MouseDragEnd1Pane
+      bind-key -T copy-mode-vi y send-keys -X copy-selection
+    '';
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        size = 12.0;
+        normal = {
+          family = "FiraMono Nerd Font";
+          style = "Regular";
+        };
+        bold = {
+          family = "FiraMono Nerd Font";
+          style = "Bold";
+        };
+        italic = {
+          family = "FiraMono Nerd Font";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "FiraMono Nerd Font";
+          style = "Bold Italic";
+        };
+      };
+      keyboard.bindings = [
+        {
+          key = "Return";
+          mods = "Shift";
+          chars = "\n";
+        }
+      ];
     };
   };
 
@@ -61,7 +134,42 @@
     };
   };
 
-  programs.home-manager.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+
+    extraPackages = with pkgs; [
+      python3Packages.python-lsp-server
+      clang-tools
+    ];
+
+    plugins = with pkgs.vimPlugins; [
+      sonokai
+      lualine-nvim
+      barbar-nvim
+      nvim-web-devicons
+      gitsigns-nvim
+      nvim-tree-lua
+      nvim-autopairs
+      nvim-treesitter.withAllGrammars
+      blame-nvim
+      vimtex
+      blink-cmp
+      friendly-snippets
+      nvim-lspconfig
+      telescope-nvim
+      plenary-nvim
+      telescope-fzf-native-nvim
+    ];
+  };
+
+  programs.zathura = {
+    enable = true;
+    options = {
+      selection-clipboard = "clipboard";
+      sandbox = "none";
+    };
+  };
 
   programs.zoxide = {
     enable = true;
@@ -101,8 +209,8 @@
     plugins = [
       {
         name = "powerlevel10k";
-	src = pkgs.zsh-powerlevel10k;
-	file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
         name = "powerlevel10k-config";
@@ -111,15 +219,17 @@
       }
       {
         name = "zsh-completions";
-	src = pkgs.zsh-completions;
+        src = pkgs.zsh-completions;
       }
       {
         name = "zsh-autosuggestions";
         src = pkgs.zsh-autosuggestions;
+        file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
       }
       {
         name = "zsh-syntax-highlighting";
         src = pkgs.zsh-syntax-highlighting;
+        file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
       }
     ];
 
