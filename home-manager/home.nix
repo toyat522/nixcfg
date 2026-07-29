@@ -1,5 +1,10 @@
 { config, pkgs, lib, ... }:
 
+# Define custom packages
+let
+  oriedita = pkgs.callPackage ./pkgs/oriedita.nix { };
+in
+
 {
   home.username = "toyat";
   home.homeDirectory = "/home/toyat";
@@ -20,6 +25,7 @@
     htop
     nerd-fonts.fira-mono
     obsidian
+    oriedita
     ranger
     ripgrep
     sxiv
@@ -152,7 +158,7 @@
     enable = true;
     settings = {
       font = {
-        size = 12.0;
+        size = 14.0;
         normal = {
           family = "FiraMono Nerd Font";
           style = "Regular";
