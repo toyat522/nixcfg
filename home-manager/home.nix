@@ -60,6 +60,14 @@
     videos = "${config.home.homeDirectory}/img";
   };
 
+  # Set default applications
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+    };
+  };
+
   # Write to dconf configuration system for GNOME
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
