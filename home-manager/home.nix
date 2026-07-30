@@ -22,6 +22,7 @@ in
     eza
     fastfetch
     fd
+    firefox
     htop
     nerd-fonts.fira-mono
     obsidian
@@ -70,7 +71,10 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "application/pdf" = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "application/pdf"        = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "text/html"              = "firefox.desktop";
+      "x-scheme-handler/http"  = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
     };
   };
 
