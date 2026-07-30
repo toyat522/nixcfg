@@ -142,6 +142,7 @@ in
     mouse = true;
     historyLimit = 9999999;
     escapeTime = 0;
+    terminal = "tmux-256color";
     extraConfig = ''
       # Split panes using 's' and 'v'
       bind v split-window -h
