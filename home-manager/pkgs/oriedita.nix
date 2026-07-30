@@ -39,6 +39,7 @@ maven.buildMavenPackage rec {
     Exec=oriedita
     Icon=oriedita
     Type=Application
+    StartupWMClass=oriedita-editor-Oriedita
     Categories=Graphics;
     EOF
 
