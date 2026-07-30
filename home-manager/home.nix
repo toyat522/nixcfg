@@ -19,17 +19,22 @@ in
   home.packages = with pkgs; [
     bat
     claude-code
+    cmake
     eza
     fastfetch
     fd
     firefox
+    gcc
+    gnumake
     htop
     nerd-fonts.fira-mono
     obsidian
     oriedita
+    python3
     ranger
     ripgrep
     sxiv
+    texlive.combined.scheme-medium
     thunderbird
     unzip
   ];
@@ -188,6 +193,12 @@ in
         }
       ];
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.fzf = {
