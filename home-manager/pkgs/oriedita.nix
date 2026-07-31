@@ -1,4 +1,4 @@
-{ lib, maven, jre, makeWrapper, fetchFromGitHub }:
+{ lib, maven, jre, makeWrapper, fetchFromGitHub, wrapGAppsHook3, gtk3 }:
 
 maven.buildMavenPackage rec {
   pname = "oriedita";
@@ -15,7 +15,8 @@ maven.buildMavenPackage rec {
 
   mvnParameters = "-DskipTests -pl oriedita --also-make";
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper wrapGAppsHook3 ];
+  buildInputs = [ gtk3 ];
 
   installPhase = ''
     runHook preInstall
