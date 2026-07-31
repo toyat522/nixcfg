@@ -321,7 +321,7 @@ in
     shellAliases = {
       bat = "bat -p";
       cat = "bat -p";
-      ls = "eza --color=always";
+      ls = "eza -g --color=always";
       tks = "tmux kill-session";
       vi = "nvim";
       vim = "nvim";
