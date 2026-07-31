@@ -27,6 +27,7 @@ in
     gcc
     gnumake
     htop
+    imagemagick
     nerd-fonts.fira-mono
     obsidian
     oriedita
