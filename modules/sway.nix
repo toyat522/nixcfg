@@ -10,9 +10,9 @@
       dex
       dunst
       grim
-      light
+      brightnessctl
       polkit_gnome
-      rofi-wayland
+      rofi
       slurp
       swayidle
       swaylock-effects
@@ -32,5 +32,9 @@
 
   security.pam.services.swaylock = {};
 
-  services.displayManager.gdm.enable = true;
+  # Enable SDDM greeter on Wayland
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
 }

@@ -7,13 +7,17 @@
 }
 
 window#waybar {
-  background-color: #2e3440;
+  background: transparent;
   color: #eceff4;
+}
+
+window#waybar > box {
+  background-color: #2e3440;
   border-radius: 5px;
 }
 
 #custom-launcher {
-  color: #e95420;
+  color: #7ebae4;
   padding: 0 8px 0 12px;
 }
 

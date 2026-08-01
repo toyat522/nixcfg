@@ -19,7 +19,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.toyat = import ./home/gnome-full.nix;
+            home-manager.users.toyat = import ./home/sway-full.nix;
           }
         ];
       };

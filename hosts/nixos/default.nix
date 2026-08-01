@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
 
     ../../modules/core.nix
-    ../../modules/gnome.nix
+    ../../modules/sway.nix
     ../../modules/users.nix
   ];
 

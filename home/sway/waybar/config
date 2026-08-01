@@ -11,7 +11,7 @@
   "modules-right": ["backlight", "pulseaudio", "network", "battery", "clock"],
 
   "custom/launcher": {
-    "format": "<span size='14336'></span>",
+    "format": "<span size='14336'></span>",
     "on-click": "rofi -modi drun,run -show drun -icon-theme 'Papirus' -show-icons",
     "tooltip": false
   },
@@ -28,16 +28,16 @@
   "sway/workspaces": {
     "format": "<span size='14336'>{icon}</span>",
     "format-icons": {
-      "1": " ",
+      "1": " ",
       "2": "󰈹 ",
-      "3": " ",
+      "3": " ",
       "4": "󰘐 ",
       "5": "󰚩 ",
-      "6": " ",
+      "6": " ",
       "7": "󰊴 ",
       "8": "󰈙 ",
       "9": "󰗃 ",
-      "default": " "
+      "default": " "
     }
   },
 
@@ -49,15 +49,14 @@
 
   "pulseaudio": {
     "format": "{icon} {volume}",
-    "format-muted": " ",
+    "format-muted": " ",
     "format-icons": {
-      "default": ["", "", ""]
+      "default": ["", "", ""]
     },
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
 
   "network": {
-    "interface": "wlp0s20f3",
     "format-wifi": "󰤨 ",
     "format-disconnected": "󰤭 ",
     "format-linked": "󰤨 ",
@@ -65,7 +64,7 @@
   },
 
   "battery": {
-    "bat": "BAT0",
+    "bat": "BAT1",
     "adapter": "AC",
     "full-at": 98,
     "interval": 5,
@@ -80,8 +79,8 @@
 
   "clock": {
     "interval": 5,
-    "format": " {:%e %b %Y  󰥔 %I:%M %p}",
-    "format-alt": " {:%a,%e  󰥔 %I:%M:%S %p}",
+    "format": " {:%e %b %Y  󰥔 %I:%M %p}",
+    "format-alt": " {:%a,%e  󰥔 %I:%M:%S %p}",
     "tooltip": false
   }
 }
