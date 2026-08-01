@@ -64,8 +64,6 @@
   },
 
   "battery": {
-    "bat": "BAT1",
-    "adapter": "AC",
     "full-at": 98,
     "interval": 5,
     "format": "{icon} {capacity}",
