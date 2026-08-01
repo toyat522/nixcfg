@@ -1,21 +1,13 @@
 { config, pkgs, lib, ... }:
 
-# Define custom packages
-let
-  oriedita = pkgs.callPackage ./pkgs/oriedita.nix { };
-in
-
 {
   home.username = "toyat";
   home.homeDirectory = "/home/toyat";
 
-  # Home Manager release that is compatible with this configuration
   home.stateVersion = "26.05";
 
-  # Install Nix packages into the environment
   home.packages = with pkgs; [
     bat
-    claude-code
     cmake
     eza
     fastfetch
@@ -24,38 +16,27 @@ in
     gcc
     gnumake
     htop
-    imagemagick
     nerd-fonts.fira-mono
-    obsidian
-    oriedita
     python3
     ranger
     ripgrep
     sxiv
-    texlive.combined.scheme-medium
-    thunderbird
     unzip
     zip
   ];
 
-  # Append to PATH
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  # Manage environment variables
   home.sessionVariables = { };
 
-  # Create symlinks to ~/
-  home.file = {
-  };
+  home.file = { };
 
-  # Create symlinks to ~/.config
   xdg.configFile = {
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
     "nvim/ftplugin".source = ./nvim/ftplugin;
   };
 
-  # Set XDG directories
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
@@ -71,7 +52,6 @@ in
     videos = "${config.home.homeDirectory}/img";
   };
 
-  # Set default applications
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -82,7 +62,6 @@ in
     };
   };
 
-  # Write to dconf configuration system for GNOME
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
       xkb-options = [ "caps:swapescape" ];
@@ -92,44 +71,8 @@ in
     };
   };
 
-  # Enable systemd services
   services.syncthing.enable = true;
 
-  # Japanese input via fcitx5 + mozc
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      waylandFrontend = true;
-      addons = with pkgs; [
-        fcitx5-mozc
-        fcitx5-gtk
-      ];
-      settings = {
-        globalOptions = {
-          "Hotkey/TriggerKeys" = {
-            "0" = "Control+space";
-            "1" = "Zenkaku_Hankaku";
-          };
-        };
-        inputMethod = {
-          "Groups/0" = {
-            Name = "Default";
-            "Default Layout" = "us";
-            DefaultIM = "mozc";
-          };
-          "Groups/0/Items/0".Name = "keyboard-us";
-          "Groups/0/Items/1".Name = "mozc";
-        };
-      };
-    };
-  };
-
-  # Remove the fcitx UI
-  systemd.user.services.fcitx5-daemon.Service.ExecStart = lib.mkForce
-    "${config.i18n.inputMethod.fcitx5.fcitx5-with-addons.override { addons = config.i18n.inputMethod.fcitx5.addons; }}/bin/fcitx5 --disable classicui";
-
-  # Allow font configuration
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
@@ -263,7 +206,7 @@ in
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    defaultKeymap = "viins"; # vim keybindings
+    defaultKeymap = "viins";
 
     history = {
       size = 5000;

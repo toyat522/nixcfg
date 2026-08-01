@@ -10,17 +10,19 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      modules = [
-        ./hosts/nixos
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/nixos
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.toyat = import ./home/default.nix;
-        }
-      ];
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.toyat = import ./home/gnome-full.nix;
+          }
+        ];
+      };
     };
   };
 }
