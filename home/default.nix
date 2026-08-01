@@ -12,9 +12,6 @@ in
   # Home Manager release that is compatible with this configuration
   home.stateVersion = "26.05";
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Install Nix packages into the environment
   home.packages = with pkgs; [
     bat
@@ -38,6 +35,7 @@ in
     texlive.combined.scheme-medium
     thunderbird
     unzip
+    zip
   ];
 
   # Append to PATH
