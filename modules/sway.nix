@@ -32,6 +32,9 @@
 
   security.pam.services.swaylock = {};
 
+  # Tell JRE to manage resizing itself
+  environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
+
   # Enable SDDM greeter on Wayland
   services.displayManager.sddm = {
     enable = true;
