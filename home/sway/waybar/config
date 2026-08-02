@@ -6,7 +6,7 @@
   "margin-left": 16,
   "margin-right": 16,
 
-  "modules-left": ["custom/launcher", "custom/sep", "sway/window"],
+  "modules-left": ["custom/launcher"],
   "modules-center": ["sway/workspaces"],
   "modules-right": ["backlight", "pulseaudio", "network", "battery", "clock"],
 
@@ -14,15 +14,6 @@
     "format": "<span size='14336'></span>",
     "on-click": "rofi -modi drun,run -show drun -icon-theme 'Papirus' -show-icons",
     "tooltip": false
-  },
-
-  "custom/sep": {
-    "format": "|",
-    "tooltip": false
-  },
-
-  "sway/window": {
-    "max-length": 53
   },
 
   "sway/workspaces": {
