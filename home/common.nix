@@ -49,7 +49,7 @@
     projects = "${config.home.homeDirectory}/dev";
     publicShare = "${config.home.homeDirectory}";
     templates = "${config.home.homeDirectory}";
-    videos = "${config.home.homeDirectory}/img";
+    videos = "${config.home.homeDirectory}";
   };
 
   xdg.mimeApps = {

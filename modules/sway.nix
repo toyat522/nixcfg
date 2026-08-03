@@ -32,12 +32,28 @@
 
   security.pam.services.swaylock = {};
 
+  # Thunar file manager
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  services.gvfs.enable = true;     # trash, remote/network mounts
+  services.tumbler.enable = true;  # thumbnail generation
+
   # Tell JRE to manage resizing itself
   environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
 
-  # Enable SDDM greeter on Wayland
+  # Enable catppuccin theme SDDM greeter
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "catppuccin-mocha-mauve";
+    extraPackages = with pkgs.kdePackages; [ qtsvg qt5compat ];
   };
+  environment.systemPackages = [
+    (pkgs.catppuccin-sddm.override { disableBackground = true; })
+  ];
 }

@@ -12,7 +12,7 @@
 
   "custom/launcher": {
     "format": "<span size='14336'></span>",
-    "on-click": "rofi -modi drun,run -show drun -icon-theme 'Papirus' -show-icons",
+    "on-click": "rofi -modi drun,run -show drun -icon-theme 'Papirus-Dark' -show-icons",
     "tooltip": false
   },
 
