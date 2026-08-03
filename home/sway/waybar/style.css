@@ -8,16 +8,16 @@
 
 window#waybar {
   background: transparent;
-  color: #ece6f2;
+  color: #F8F8F2;
 }
 
 window#waybar > box {
-  background-color: #2f2b47;
+  background-color: #282A36;
   border-radius: 5px;
 }
 
 #custom-launcher {
-  color: #7ebae4;
+  color: #8BE9FD;
   padding: 0 8px 0 8px;
 }
 
@@ -29,11 +29,11 @@ window#waybar > box {
 }
 
 #workspaces button.focused {
-  color: #cf87e0;
+  color: #FF79C6;
 }
 
 #workspaces button.urgent {
-  color: #dd5c7a;
+  color: #FF5555;
 }
 
 #workspaces button:hover {
@@ -53,9 +53,9 @@ window#waybar > box {
 }
 
 #battery.charging {
-  color: #8fc9ae;
+  color: #50FA7B;
 }
 
 #battery.critical:not(.charging) {
-  color: #dd5c7a;
+  color: #FF5555;
 }

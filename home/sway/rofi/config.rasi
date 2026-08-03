@@ -1,14 +1,14 @@
 @theme "/dev/null"
 
 * {
-  bg0:    #1C1A2ED9;
-  bg1:    #453F63B3;
-  bg2:    #2F2B4780;
-  bg3:    #CF87E099;
-  fg0:    #ECE6F2;
-  fg1:    #F5F0FA;
-  fg2:    #9A93B5;
-  fg3:    #2F2B47;
+  bg0:    #282A36D9;
+  bg1:    #44475AB3;
+  bg2:    #44475A80;
+  bg3:    #FF79C699;
+  fg0:    #F8F8F2;
+  fg1:    #F8F8F2;
+  fg2:    #6272A4;
+  fg3:    #44475A;
 }
 
 @import "rounded-common.rasi"

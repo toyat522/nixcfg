@@ -117,11 +117,7 @@
           style = "Bold Italic";
         };
       };
-      keyboard.bindings = [
-        { key = "Return"; mods = "Shift";     chars = "\n";    }
-        { key = "Comma";  mods = "Alt|Shift"; chars = "\\x1b<"; }
-        { key = "Period"; mods = "Alt|Shift"; chars = "\\x1b>"; }
-      ];
+      keyboard.bindings = [ { key = "Return"; mods = "Shift"; chars = "\n"; } ];
     };
   };
 
@@ -157,7 +153,7 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      sonokai
+      dracula-nvim
       lualine-nvim
       barbar-nvim
       nvim-web-devicons

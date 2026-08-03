@@ -149,12 +149,12 @@ bindsym $mod+ctrl+k resize shrink height 2 px
 bindsym $mod+ctrl+l resize grow width    2 px
 
 # Color schemes
-set $bgcolor    #cf87e0
-set $in-bgcolor #2f2b47
-set $text       #ffffff
-set $u-bgcolor  #dd5c7a
-set $indicator  #b0a8cc
-set $in-text    #9a93b5
+set $bgcolor    #FF79C6
+set $in-bgcolor #44475A
+set $text       #F8F8F2
+set $u-bgcolor  #FF5555
+set $indicator  #6272A4
+set $in-text    #6272A4
 
 #                       border          background      text       indicator   child_border
 client.focused          $bgcolor        $bgcolor        $text      $indicator  $bgcolor
