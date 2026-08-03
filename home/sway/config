@@ -61,7 +61,7 @@ bindsym ctrl+Print exec grim "$(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d_%H-%M-%
 floating_modifier $mod normal
 
 # Drag tiling windows
-tiling_drag modifier
+tiling_drag enable
 
 # Start terminal
 bindsym $mod+Shift+Return exec alacritty
