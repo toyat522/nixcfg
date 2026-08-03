@@ -1,11 +1,19 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Enable Flakes and the new nix CLI
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    # Enable Flakes and the new nix CLI
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substituters = [
+      "https://ros.cachix.org"  # nix-ros-overlay cachix
+    ];
+    trusted-public-keys = [
+      "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="  # nix-ros-overlay cachix
+    ];
+  };
 
   # Enable CUPS to print documents
   services.printing.enable = true;
