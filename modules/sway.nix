@@ -32,6 +32,11 @@
 
   security.pam.services.swaylock = {};
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
   # Thunar file manager
   programs.thunar = {
     enable = true;
