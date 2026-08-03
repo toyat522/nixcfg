@@ -16,7 +16,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "aomori";
     networkmanager.enable = true;
   };
 

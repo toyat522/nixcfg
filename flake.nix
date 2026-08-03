@@ -11,9 +11,9 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      aomori = nixpkgs.lib.nixosSystem {
         modules = [
-          ./hosts/nixos
+          ./hosts/aomori
 
           home-manager.nixosModules.home-manager
           {
