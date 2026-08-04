@@ -1,5 +1,15 @@
 # nixcfg
 
+This repository contains my NixOS and Home Manager configurations that build my systems.
+
+## Screenshots
+
+### Sway
+
+![sway](./img/sway.png)
+
+![sway_nvim](./img/sway_nvim.png)
+
 # Adding a New Host
 
 1. Create a new directory in `hosts/` with the hostname as the directory name.
