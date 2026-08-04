@@ -15,6 +15,7 @@
     firefox
     gcc
     gnumake
+    gnupg
     htop
     nerd-fonts.fira-mono
     python3

@@ -18,6 +18,10 @@
   networking = {
     hostName = "aomori";
     networkmanager.enable = true;
+
+    # Open port 53317 for LocalSend
+    firewall.allowedTCPPorts = [ 53317 ];
+    firewall.allowedUDPPorts = [ 53317 ];
   };
 
   time.timeZone = "America/Los_Angeles";
