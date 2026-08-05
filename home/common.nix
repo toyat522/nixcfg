@@ -172,7 +172,6 @@
     enable = true;
     options = {
       selection-clipboard = "clipboard";
-      sandbox = "none";
     };
   };
 
