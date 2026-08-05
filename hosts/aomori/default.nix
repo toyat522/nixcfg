@@ -20,8 +20,8 @@
     networkmanager.enable = true;
 
     # Open port 53317 for LocalSend
-    firewall.allowedTCPPorts = [ 53317 ];
-    firewall.allowedUDPPorts = [ 53317 ];
+    firewall.allowedTCPPorts = [ 22000 53317 ];
+    firewall.allowedUDPPorts = [ 21027 22000 53317 ];
   };
 
   time.timeZone = "America/Los_Angeles";

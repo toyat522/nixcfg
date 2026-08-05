@@ -22,6 +22,7 @@
     ranger
     ripgrep
     sxiv
+    tcpdump
     unzip
     zip
   ];
