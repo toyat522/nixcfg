@@ -15,7 +15,6 @@
     firefox
     gcc
     gnumake
-    gnupg
     htop
     nerd-fonts.fira-mono
     python3
@@ -64,38 +63,17 @@
     };
   };
 
+  # Start GPG agent daemon with pinentry for passphrase entry
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
   services.syncthing.enable = true;
 
   fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
-
-  programs.tmux = {
-    enable = true;
-    prefix = "C-a";
-    keyMode = "vi";
-    mouse = true;
-    historyLimit = 9999999;
-    escapeTime = 0;
-    terminal = "tmux-256color";
-    extraConfig = ''
-      bind v split-window -h
-      bind s split-window -v
-
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      bind -T copy-mode-vi V send-keys -X begin-selection
-      bind -T copy-mode-vi Y send-keys -X copy-pipe-and-cancel "wl-copy"
-
-      unbind-key -T copy-mode-vi MouseDragEnd1Pane
-      bind-key -T copy-mode-vi y send-keys -X copy-selection
-
-      set -g xterm-keys on
-    '';
-  };
 
   programs.alacritty = {
     enable = true;
@@ -139,6 +117,8 @@
     };
   };
 
+  programs.gpg.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -166,6 +146,33 @@
       plenary-nvim
       telescope-fzf-native-nvim
     ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    keyMode = "vi";
+    mouse = true;
+    historyLimit = 9999999;
+    escapeTime = 0;
+    terminal = "tmux-256color";
+    extraConfig = ''
+      bind v split-window -h
+      bind s split-window -v
+
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+
+      bind -T copy-mode-vi V send-keys -X begin-selection
+      bind -T copy-mode-vi Y send-keys -X copy-pipe-and-cancel "wl-copy"
+
+      unbind-key -T copy-mode-vi MouseDragEnd1Pane
+      bind-key -T copy-mode-vi y send-keys -X copy-selection
+
+      set -g xterm-keys on
+    '';
   };
 
   programs.zathura = {
