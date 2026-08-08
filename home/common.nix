@@ -66,7 +66,7 @@
   # Start GPG agent daemon with pinentry for passphrase entry
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
   };
 
   services.syncthing.enable = true;
