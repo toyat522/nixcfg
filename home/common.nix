@@ -38,6 +38,21 @@
     "nvim/ftplugin".source = ./nvim/ftplugin;
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf"        = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "text/html"              = "firefox.desktop";
+      "x-scheme-handler/http"  = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+    };
+  };
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings.default = [ "Alacritty.desktop" ];
+  };
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
@@ -51,16 +66,6 @@
     publicShare = "${config.home.homeDirectory}";
     templates = "${config.home.homeDirectory}";
     videos = "${config.home.homeDirectory}";
-  };
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "application/pdf"        = "org.pwmt.zathura-pdf-mupdf.desktop";
-      "text/html"              = "firefox.desktop";
-      "x-scheme-handler/http"  = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-    };
   };
 
   # Start GPG agent daemon with pinentry for passphrase entry

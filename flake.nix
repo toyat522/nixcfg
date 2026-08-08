@@ -1,5 +1,5 @@
 {
-  description = "NixOS system flake for toyat522";
+  description = "Nix and Home Manager configuration for toyat522";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -12,12 +12,16 @@
 
   outputs = inputs@{ nixpkgs, home-manager, nixgl, ... }:
   let
+    # Extra Home Manager configuration for non-NixOS systems
     pkgs = import nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
     };
     mkGnome = nixglPkg: nixglBin: home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+      # Fix Electron SUID sandbox issue on non-NixOS distros
+      pkgs = pkgs.extend (_: prev: {
+        obsidian = prev.obsidian.override { commandLineArgs = "--no-sandbox"; };
+      });
       modules = [
         ./home/gnome-full.nix
 
