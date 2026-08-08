@@ -1,7 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ./common.nix ];
+
+  home.packages = with pkgs; [
+    (catppuccin-gtk.override { accents = [ "mauve" ]; variant = "mocha"; size = "standard"; })
+    (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
+    catppuccin-cursors.mochaDark
+  ];
 
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
@@ -9,6 +15,10 @@
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      gtk-theme = "catppuccin-mocha-mauve-standard";
+      icon-theme = "Papirus-Dark";
+      cursor-theme = "catppuccin-mocha-dark-cursors";
+      cursor-size = 24;
     };
 
     # Ctrl+Alt+t to open Alacritty on GNOME
