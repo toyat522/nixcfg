@@ -78,6 +78,10 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      keyboard.bindings = [
+        { key = "Return"; mods = "Shift"; chars = "\n"; }
+      ];
+
       font = {
         size = 14.0;
         normal = {
@@ -97,7 +101,38 @@
           style = "Bold Italic";
         };
       };
-      keyboard.bindings = [ { key = "Return"; mods = "Shift"; chars = "\n"; } ];
+
+      # Dracula theme
+      colors = {
+        primary = {
+          background = "#282A36";
+          foreground = "#F8F8F2";
+        };
+        cursor = {
+          text   = "#282A36";
+          cursor = "#F8F8F2";
+        };
+        normal = {
+          black   = "#21222C";
+          red     = "#FF5555";
+          green   = "#50FA7B";
+          yellow  = "#F1FA8C";
+          blue    = "#BD93F9";
+          magenta = "#FF79C6";
+          cyan    = "#8BE9FD";
+          white   = "#F8F8F2";
+        };
+        bright = {
+          black   = "#6272A4";
+          red     = "#FF6E6E";
+          green   = "#69FF94";
+          yellow  = "#FFFFA5";
+          blue    = "#D6ACFF";
+          magenta = "#FF92DF";
+          cyan    = "#A4FFFF";
+          white   = "#FFFFFF";
+        };
+      };
     };
   };
 
