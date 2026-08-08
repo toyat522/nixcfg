@@ -10,6 +10,7 @@ in
   home.packages = with pkgs; [
     bitwarden-cli
     claude-code
+    gimp
     imagemagick
     localsend
     obsidian
