@@ -44,4 +44,7 @@
 
   # Set the default system editor to vim
   environment.variables.EDITOR = "vim";
+
+  # Enable Docker
+  virtualisation.docker.enable = true;
 }
