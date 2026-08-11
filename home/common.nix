@@ -12,17 +12,18 @@
     eza
     fastfetch
     fd
+    file
     firefox
     gcc
     gnumake
     htop
     nerd-fonts.fira-mono
     python3
-    ranger
     ripgrep
     sxiv
     tcpdump
     unzip
+    yazi
     zip
   ];
 
@@ -42,6 +43,12 @@
     enable = true;
     defaultApplications = {
       "application/pdf"        = "org.pwmt.zathura-pdf-mupdf.desktop";
+      "image/jpeg"             = "sxiv.desktop";
+      "image/png"              = "sxiv.desktop";
+      "image/gif"              = "sxiv.desktop";
+      "image/webp"             = "sxiv.desktop";
+      "image/bmp"              = "sxiv.desktop";
+      "image/tiff"             = "sxiv.desktop";
       "text/html"              = "firefox.desktop";
       "x-scheme-handler/http"  = "firefox.desktop";
       "x-scheme-handler/https" = "firefox.desktop";
