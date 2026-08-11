@@ -87,64 +87,43 @@
 
   programs.home-manager.enable = true;
 
-  programs.alacritty = {
+  programs.kitty = {
     enable = true;
+    font = {
+      name = "FiraMono Nerd Font";
+      size = 14.0;
+    };
+    keybindings = {
+      "shift+enter" = "send_text all \\n";
+    };
+    shellIntegration.mode = "no-cursor";
     settings = {
-      keyboard.bindings = [
-        { key = "Return"; mods = "Shift"; chars = "\n"; }
-      ];
-
-      font = {
-        size = 14.0;
-        normal = {
-          family = "FiraMono Nerd Font";
-          style = "Regular";
-        };
-        bold = {
-          family = "FiraMono Nerd Font";
-          style = "Bold";
-        };
-        italic = {
-          family = "FiraMono Nerd Font";
-          style = "Italic";
-        };
-        bold_italic = {
-          family = "FiraMono Nerd Font";
-          style = "Bold Italic";
-        };
-      };
-
+      tab_bar_style         = "hidden";
+      filter_notification   = "all";
+      enable_audio_bell     = false;
+      cursor_shape          = "block";
+      cursor_blink_interval = 0;
       # Dracula theme
-      colors = {
-        primary = {
-          background = "#282A36";
-          foreground = "#F8F8F2";
-        };
-        cursor = {
-          text   = "#282A36";
-          cursor = "#F8F8F2";
-        };
-        normal = {
-          black   = "#21222C";
-          red     = "#FF5555";
-          green   = "#50FA7B";
-          yellow  = "#F1FA8C";
-          blue    = "#BD93F9";
-          magenta = "#FF79C6";
-          cyan    = "#8BE9FD";
-          white   = "#F8F8F2";
-        };
-        bright = {
-          black   = "#6272A4";
-          red     = "#FF6E6E";
-          green   = "#69FF94";
-          yellow  = "#FFFFA5";
-          blue    = "#D6ACFF";
-          magenta = "#FF92DF";
-          cyan    = "#A4FFFF";
-          white   = "#FFFFFF";
-        };
-      };
+      background        = "#282A36";
+      foreground        = "#F8F8F2";
+      cursor            = "#F8F8F2";
+      cursor_text_color = "#282A36";
+      color0  = "#21222C";
+      color1  = "#FF5555";
+      color2  = "#50FA7B";
+      color3  = "#F1FA8C";
+      color4  = "#BD93F9";
+      color5  = "#FF79C6";
+      color6  = "#8BE9FD";
+      color7  = "#F8F8F2";
+      color8  = "#6272A4";
+      color9  = "#FF6E6E";
+      color10 = "#69FF94";
+      color11 = "#FFFFA5";
+      color12 = "#D6ACFF";
+      color13 = "#FF92DF";
+      color14 = "#A4FFFF";
+      color15 = "#FFFFFF";
     };
   };
 

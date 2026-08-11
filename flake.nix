@@ -28,15 +28,15 @@
         # Allows Home Manager configuration to run properly for non-NixOS distros
         { targets.genericLinux.enable = true; }
 
-        # Solve the "OpenGL" problem for alacritty on non-NixOS distros
+        # Solve the "OpenGL" problem for kitty on non-NixOS distros
         ({ pkgs, ... }: {
-          programs.alacritty.package = pkgs.symlinkJoin {
-            name = "alacritty";
+          programs.kitty.package = pkgs.symlinkJoin {
+            name = "kitty";
             paths = [
-              (pkgs.writeShellScriptBin "alacritty" ''
-                exec ${nixglPkg}/bin/${nixglBin} ${pkgs.alacritty}/bin/alacritty "$@"
+              (pkgs.writeShellScriptBin "kitty" ''
+                exec ${nixglPkg}/bin/${nixglBin} ${pkgs.kitty}/bin/kitty "$@"
               '')
-              pkgs.alacritty
+              pkgs.kitty
             ];
           };
         })
