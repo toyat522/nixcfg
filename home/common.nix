@@ -57,7 +57,7 @@
 
   xdg.terminal-exec = {
     enable = true;
-    settings.default = [ "Alacritty.desktop" ];
+    settings.default = [ "kitty.desktop" ];
   };
 
   xdg.userDirs = {

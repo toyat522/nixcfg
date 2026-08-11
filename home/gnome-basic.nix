@@ -21,7 +21,7 @@
       cursor-size = 24;
     };
 
-    # Ctrl+Alt+t to open Alacritty on GNOME
+    # Ctrl+Alt+t to open kitty on GNOME
     "org/gnome/settings-daemon/plugins/media-keys" = {
       terminal = [];
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
