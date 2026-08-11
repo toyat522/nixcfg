@@ -10,26 +10,6 @@ This repository contains my NixOS and Home Manager configurations that build my 
 
 ![sway_nvim](./img/sway_nvim.png)
 
-# Adding a New Host
-
-1. Create a new directory in `hosts/` with the hostname as the directory name.
-
-2. Copy `hardware-configuration.nix` from `/etc/nixos/hardware-configuration.nix`:
-
-```
-sudo cp /etc/nixos/hardware-configuration.nix ./hosts/<hostname>/hardware-configuration.nix
-```
-
-3. Change the file ownership from root to user:
-
-```
-sudo chown <username>:users ./hosts/<hostname>/hardware-configuration.nix
-```
-
-4. Populate `./hosts/<hostname>/default.nix`.
-
-5. Populate `flake.nix` with a new NixOS configuration.
-
 ## Usage
 
 If on a non-NixOS system, the first step is to install the [Nix package manager](https://nixos.org/download/).
@@ -37,6 +17,20 @@ If on a non-NixOS system, the first step is to install the [Nix package manager]
 On any system, install [Home Manager](https://nix-community.github.io/home-manager/installation/standalone.html).
 Make sure that the appropriate Home Manager channel is added. You can see which channel is appropriate by checking `flake.nix`.
 Once Home Manager is installed, follow the instructions below for your system.
+
+### Adding a New Host
+
+1. Create a new directory in `hosts/` with the hostname as the directory name.
+
+2. Copy `hardware-configuration.nix` from `/etc/nixos/hardware-configuration.nix`:
+
+```
+cp /etc/nixos/hardware-configuration.nix ./hosts/<hostname>/hardware-configuration.nix
+```
+
+3. Populate `./hosts/<hostname>/default.nix`.
+
+4. Populate `flake.nix` with a new NixOS configuration.
 
 ### NixOS
 
@@ -71,3 +65,9 @@ echo /home/<username>/.nix-profile/bin/zsh | sudo tee -a /etc/shells
 ```
 chsh -s /home/<username>/.nix-profile/bin/zsh
 ```
+
+## Troubleshooting
+
+### Enter tty from greeter
+
+Press Ctrl+Alt+F3.

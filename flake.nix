@@ -57,6 +57,18 @@
           }
         ];
       };
+      hague = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/hague
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.toyat = import ./home/sway-full.nix;
+          }
+        ];
+      };
     };
 
     # Switch configuration with `home-manager switch --flake .#<config>`
