@@ -28,6 +28,10 @@
     };
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
   xdg.configFile = {
     "sway/config".source = ./sway/config;
 
