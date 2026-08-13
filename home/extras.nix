@@ -12,6 +12,7 @@ in
     claude-code
     gimp
     imagemagick
+    libreoffice
     localsend
     obsidian
     oriedita
