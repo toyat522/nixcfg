@@ -47,4 +47,8 @@
 
   # Enable Docker
   virtualisation.docker.enable = true;
+
+  # Allow running ARM64 binaries through QEMU software emulation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.preferStaticEmulators = true;
 }

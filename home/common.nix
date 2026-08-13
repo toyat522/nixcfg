@@ -23,6 +23,7 @@
     sxiv
     tcpdump
     unzip
+    usbutils
     yazi
     zip
   ];
