@@ -20,6 +20,7 @@
     nerd-fonts.fira-mono
     python3
     ripgrep
+    screen
     sxiv
     tcpdump
     unzip
