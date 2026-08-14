@@ -18,6 +18,12 @@
   # Enable CUPS to print documents
   services.printing.enable = true;
 
+  # Enable mDNS for .local hostname resolution
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
+
   # Enable the OpenSSH daemon
   services.openssh.enable = true;
 

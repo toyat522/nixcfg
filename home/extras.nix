@@ -16,6 +16,7 @@ in
     localsend
     obsidian
     oriedita
+    remmina
     texlive.combined.scheme-medium
     thunderbird
   ];
