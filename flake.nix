@@ -20,7 +20,7 @@
     pkgs-x86     = mkPkgs "x86_64-linux";
     pkgs-aarch64 = mkPkgs "aarch64-linux";
 
-    mkGnome = pkgs: nixglPkg: nixglBin: home-manager.lib.homeManagerConfiguration {
+    mkGnome = pkgs: extraModules: home-manager.lib.homeManagerConfiguration {
       # Fix Electron SUID sandbox issue on non-NixOS distros
       pkgs = pkgs.extend (_: prev: {
         obsidian = prev.obsidian.override { commandLineArgs = "--no-sandbox"; };
@@ -31,20 +31,21 @@
         # Allows Home Manager configuration to run properly for non-NixOS distros
         { targets.genericLinux.enable = true; }
 
-        # Solve the "OpenGL" problem for kitty on non-NixOS distros
-        ({ pkgs, ... }: {
-          programs.kitty.package = pkgs.symlinkJoin {
-            name = "kitty";
-            paths = [
-              (pkgs.writeShellScriptBin "kitty" ''
-                exec ${nixglPkg}/bin/${nixglBin} ${pkgs.kitty}/bin/kitty "$@"
-              '')
-              pkgs.kitty
-            ];
-          };
-        })
-      ];
+      ] ++ extraModules;
     };
+
+    # Wrap kitty with nixGL to solve the OpenGL problem on non-NixOS distros
+    nixGLKittyModule = nixglPkg: nixglBin: ({ pkgs, ... }: {
+      programs.kitty.package = pkgs.symlinkJoin {
+        name = "kitty";
+        paths = [
+          (pkgs.writeShellScriptBin "kitty" ''
+            exec ${nixglPkg}/bin/${nixglBin} ${pkgs.kitty}/bin/kitty "$@"
+          '')
+          pkgs.kitty
+        ];
+      };
+    });
   in {
     # Switch configuration with `sudo nixos-rebuild switch --flake .#<hostname>`
     nixosConfigurations = {
@@ -74,11 +75,11 @@
       };
     };
 
-    # Switch configuration with `home-manager switch --flake .#<config> --impure`
+    # Switch configuration with `home-manager switch --flake .#<config>`
     homeConfigurations = {
-      toyat-intel          = mkGnome pkgs-x86    nixgl.packages.x86_64-linux.nixGLIntel    "nixGLIntel";
-      toyat-nvidia         = mkGnome pkgs-x86    nixgl.packages.x86_64-linux.nixGLNvidia   "nixGLNvidia";
-      toyat-nvidia-aarch64 = mkGnome pkgs-aarch64 nixgl.packages.aarch64-linux.nixGLNvidia "nixGLNvidia";
+      toyat-intel  = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLIntel  "nixGLIntel") ];
+      toyat-nvidia = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLNvidia "nixGLNvidia") ];
+      toyat-jetson = mkGnome pkgs-aarch64 [];
     };
   };
 }
