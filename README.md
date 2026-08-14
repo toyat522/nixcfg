@@ -49,10 +49,11 @@ experimental-features = nix-command flakes
 2. Install the packages via Nix and Home Manager:
 
 ```
-home-manager switch --flake .#<config>
+home-manager switch --flake .#<config> --impure
 ```
 
 > Configuration options are the username suffixed with `-intel` or `-nvidia`, depending on the GPU type.
+> Additionally, if the system is `aarch64` (e.g. Jetson machines), the options are further suffixed with `-aarch64`.
 
 3. Add path to Nix's zsh to `/etc/shells`, which lists valid login shells:
 
