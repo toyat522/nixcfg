@@ -13,7 +13,6 @@ in
     gimp
     imagemagick
     libreoffice
-    localsend
     obsidian
     oriedita
     remmina

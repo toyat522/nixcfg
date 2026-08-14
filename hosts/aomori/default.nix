@@ -15,13 +15,25 @@
     efi.canTouchEfiVariables = true;
   };
 
+  services.tailscale.enable = true;
+
   networking = {
     hostName = "aomori";
     networkmanager.enable = true;
 
-    # Open port 53317 for LocalSend
-    firewall.allowedTCPPorts = [ 22000 53317 ];
-    firewall.allowedUDPPorts = [ 21027 22000 53317 ];
+    firewall = {
+      trustedInterfaces = [ "tailscale0" ];
+
+      allowedTCPPorts = [
+        22000  # Syncthing file transfer
+      ];
+
+      allowedUDPPorts = [
+        21027  # Syncthing discovery
+        22000  # Syncthing file transfer
+        config.services.tailscale.port
+      ];
+    };
   };
 
   time.timeZone = "America/Los_Angeles";

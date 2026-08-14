@@ -15,9 +15,6 @@
     ];
   };
 
-  # Enable CUPS to print documents
-  services.printing.enable = true;
-
   # Enable mDNS for .local hostname resolution
   services.avahi = {
     enable = true;
@@ -26,6 +23,9 @@
 
   # Enable the OpenSSH daemon
   services.openssh.enable = true;
+
+  # Enable CUPS to print documents
+  services.printing.enable = true;
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
