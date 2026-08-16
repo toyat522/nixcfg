@@ -279,7 +279,7 @@
       bat = "bat -p";
       cat = "bat -p";
       ls = "eza -g --color=always";
-      ssh = "kitty +kitten ssh";
+      ssh = "TERM=xterm-256color ssh";
       tks = "tmux kill-session";
       vi = "nvim";
       vim = "nvim";
