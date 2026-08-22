@@ -20,3 +20,9 @@ vim.lsp.config('clangd', {
     root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac' },
 })
 vim.lsp.enable({ 'pylsp', 'clangd' })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf })
+    end,
+})
