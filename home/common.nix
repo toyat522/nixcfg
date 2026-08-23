@@ -23,6 +23,7 @@
     screen
     sxiv
     tcpdump
+    tmuxp
     unzip
     usbutils
     yazi
