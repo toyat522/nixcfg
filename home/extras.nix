@@ -18,5 +18,6 @@ in
     remmina
     texlive.combined.scheme-medium
     thunderbird
+    vlc
   ];
 }

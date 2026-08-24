@@ -12,6 +12,7 @@
     eza
     fastfetch
     fd
+    ffmpeg
     file
     firefox
     gcc
