@@ -221,6 +221,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
+    completionInit = "autoload -U compinit && compinit -C";
     defaultKeymap = "viins";
 
     history = {
