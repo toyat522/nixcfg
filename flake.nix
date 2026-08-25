@@ -20,19 +20,26 @@
     pkgs-x86     = mkPkgs "x86_64-linux";
     pkgs-aarch64 = mkPkgs "aarch64-linux";
 
-    mkGnome = pkgs: extraModules: home-manager.lib.homeManagerConfiguration {
-      # Fix Electron SUID sandbox issue on non-NixOS distros
-      pkgs = pkgs.extend (_: prev: {
-        obsidian = prev.obsidian.override { commandLineArgs = "--no-sandbox"; };
-      });
-      modules = [
-        ./home/gnome-full.nix
+    mkGnome = pkgs: extraModules:
+      let username = builtins.getEnv "USER";
+      in home-manager.lib.homeManagerConfiguration {
+        # Fix Electron SUID sandbox issue on non-NixOS distros
+        pkgs = pkgs.extend (_: prev: {
+          obsidian = prev.obsidian.override { commandLineArgs = "--no-sandbox"; };
+        });
+        modules = [
+          ./home/gnome-full.nix
 
-        # Allows Home Manager configuration to run properly for non-NixOS distros
-        { targets.genericLinux.enable = true; }
+          # Allows Home Manager configuration to run properly for non-NixOS distros
+          { targets.genericLinux.enable = true; }
 
-      ] ++ extraModules;
-    };
+          {
+            home.username = username;
+            home.homeDirectory = "/home/${username}";
+          }
+
+        ] ++ extraModules;
+      };
 
     # Wrap kitty with nixGL to solve the OpenGL problem on non-NixOS distros
     nixGLKittyModule = nixglPkg: nixglBin: ({ pkgs, ... }: {
@@ -77,9 +84,9 @@
 
     # Switch configuration with `home-manager switch --flake .#<config>`
     homeConfigurations = {
-      toyat-intel  = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLIntel  "nixGLIntel") ];
-      toyat-nvidia = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLNvidia "nixGLNvidia") ];
-      toyat-jetson = mkGnome pkgs-aarch64 [];
+      intel  = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLIntel  "nixGLIntel") ];
+      nvidia = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLNvidia "nixGLNvidia") ];
+      jetson = mkGnome pkgs-aarch64 [];
     };
   };
 }
