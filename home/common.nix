@@ -30,7 +30,9 @@
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  home.sessionVariables = { };
+  home.sessionVariables = {
+    SHELL = "${pkgs.zsh}/bin/zsh";
+  };
 
   home.file = { };
 
@@ -99,6 +101,7 @@
     };
     shellIntegration.enableZshIntegration = false;
     settings = {
+      shell                 = "${pkgs.zsh}/bin/zsh --login";
       tab_bar_style         = "hidden";
       filter_notification   = "all";
       enable_audio_bell     = false;
