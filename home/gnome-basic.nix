@@ -6,8 +6,16 @@
   home.packages = with pkgs; [
     (catppuccin-gtk.override { accents = [ "mauve" ]; variant = "mocha"; size = "standard"; })
     (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
-    catppuccin-cursors.mochaDark
+    wl-clipboard
+    xclip
   ];
+
+  home.pointerCursor = {
+    name = "catppuccin-mocha-dark-cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 24;
+    gtk.enable = true;
+  };
 
   dconf.settings = {
     "org/gnome/desktop/input-sources" = {
