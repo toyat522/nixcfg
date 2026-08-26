@@ -8,11 +8,14 @@
     sxiv
   ]);
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/dev/ngc-cli"
+  ];
 
   home.sessionVariables = {
-    SHELL = "${pkgs.zsh}/bin/zsh";
     ISAAC_ROS_WS = "/home/ttakahashi/workspaces/isaac/";
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
   xdg.configFile = {
@@ -73,7 +76,7 @@
     enable = true;
     font = {
       name = "FiraMono Nerd Font";
-      size = 14.0;
+      size = 12.0;
     };
     keybindings = {
       "shift+enter" = "send_text all \\n";
