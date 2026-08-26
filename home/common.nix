@@ -12,6 +12,7 @@
 
   home.sessionVariables = {
     SHELL = "${pkgs.zsh}/bin/zsh";
+    ISAAC_ROS_WS = "/home/ttakahashi/workspaces/isaac/";
   };
 
   xdg.configFile = {
@@ -30,9 +31,9 @@
       "image/webp"             = "sxiv.desktop";
       "image/bmp"              = "sxiv.desktop";
       "image/tiff"             = "sxiv.desktop";
-      "text/html"              = "firefox.desktop";
-      "x-scheme-handler/http"  = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
+      "text/html"              = "google-chrome.desktop";
+      "x-scheme-handler/http"  = "google-chrome.desktop";
+      "x-scheme-handler/https" = "google-chrome.desktop";
     };
   };
 
