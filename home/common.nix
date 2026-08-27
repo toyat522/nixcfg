@@ -14,7 +14,7 @@
   ];
 
   home.sessionVariables = {
-    ISAAC_ROS_WS = "/home/ttakahashi/workspaces/isaac/";
+    ISAAC_ROS_WS = "/home/${config.home.username}/workspaces/isaac/";
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
