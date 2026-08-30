@@ -107,7 +107,7 @@
     # Switch configuration with `home-manager switch --flake .#<config>`
     homeConfigurations = {
       intel  = mkGnome pkgs-x86 [ (nixGLKittyModule nixgl-x86.nixGLIntel "nixGLIntel") ];
-      nvidia = mkGnome pkgs-x86 [ (nixGLKittyModule (nixgl-x86.nvidiaPackages { version = nvidiaVersion; }).nixGLNvidia "nixGLNvidia") ];
+      nvidia = mkGnome pkgs-x86 [ (nixGLKittyModule (nixgl-x86.nvidiaPackages { version = nvidiaVersion; }).nixGLNvidia "nixGLNvidia-${nvidiaVersion}") ];
       jetson = mkGnome pkgs-aarch64 [];
     };
   };
