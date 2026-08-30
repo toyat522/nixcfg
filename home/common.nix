@@ -14,8 +14,6 @@
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
-  home.file = { };
-
   xdg.configFile = {
     "nvim/init.lua".source = ./nvim/init.lua;
     "nvim/lua".source = ./nvim/lua;
@@ -115,7 +113,7 @@
     enable = true;
     settings = {
       user = {
-        name = "toyat522";
+        name = "Toya Takahashi";
         email = "toyatakahashi522@gmail.com";
       };
       init.defaultBranch = "main";

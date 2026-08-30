@@ -10,40 +10,36 @@ This repository contains my NixOS and Home Manager configurations that build my 
 
 ![sway_nvim](./img/sway_nvim.png)
 
-## Usage
+## Setup
 
-If on a non-NixOS system, the first step is to install the [Nix package manager](https://nixos.org/download/).
+### NixOS
 
-On any system, install [Home Manager](https://nix-community.github.io/home-manager/installation/standalone.html).
-Make sure that the appropriate Home Manager channel is added. You can see which channel is appropriate by checking `flake.nix`.
-Once Home Manager is installed, follow the instructions below for your system.
+1. Install [Home Manager](https://nix-community.github.io/home-manager/installation/standalone.html).
 
-### Adding a New Host
+```
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
 
-1. Create a new directory in `hosts/` with the hostname as the directory name.
+2. Create a new directory in `hosts/` with the hostname as the directory name.
 
-2. Copy `hardware-configuration.nix` from `/etc/nixos/hardware-configuration.nix`:
+3. Copy `hardware-configuration.nix` from `/etc/nixos/hardware-configuration.nix`:
 
 ```
 cp /etc/nixos/hardware-configuration.nix ./hosts/<hostname>/hardware-configuration.nix
 ```
 
-3. Populate `./hosts/<hostname>/default.nix`.
+4. Populate `./hosts/<hostname>/default.nix`.
 
-4. Populate `flake.nix` with a new NixOS configuration.
-
-### NixOS
-
-```
-sudo nixos-rebuild switch --flake .#<hostname>
-```
+5. Populate `flake.nix` with a new NixOS configuration.
 
 ### Non-NixOS Systems
 
-1. Enable [flakes](https://nixos.wiki/wiki/Flakes) by adding the following to `~/.config/nix/nix.conf`:
+1. Run the installation script:
 
 ```
-experimental-features = nix-command flakes
+./install.sh
 ```
 
 2. Install the packages via Nix and Home Manager:
@@ -52,7 +48,7 @@ experimental-features = nix-command flakes
 home-manager switch --flake .#<config> --impure
 ```
 
-> Configuration options are `intel`, `nvidia`, or `jetson` depending on the GPU type.
+> See the "Usage" section for available configurations
 
 3. Add path to Nix's zsh to `/etc/shells`, which lists valid login shells:
 
@@ -66,7 +62,7 @@ echo /home/<username>/.nix-profile/bin/zsh | sudo tee -a /etc/shells
 chsh -s /home/<username>/.nix-profile/bin/zsh
 ```
 
-## Secrets
+### Secrets
 
 Secret environment variables (API keys, tokens) are kept out of the this repo. On login,
 zsh sources `~/.config/secrets.env` if it exists.
@@ -79,6 +75,33 @@ export GITHUB_TOKEN=...
 ```
 
 The file is optional per host. If it is absent, login proceeds normally.
+
+## Usage
+
+### NixOS
+
+```
+sudo nixos-rebuild switch --flake .#<hostname>
+```
+
+### Non-NixOS
+
+```
+home-manager switch --flake .#<config> --impure
+```
+
+> Configuration options are `intel`, `nvidia`, or `jetson` depending on the GPU type.
+
+### Creating a Devshell
+
+To create devshell, run the following command:
+
+```
+nix develop -c zsh
+```
+
+This will start an isolated zsh development shell which includes the custom shell configurations
+(including neovim, tmux, etc).
 
 ## Troubleshooting
 
