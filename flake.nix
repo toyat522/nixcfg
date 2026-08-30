@@ -10,7 +10,7 @@
     nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixgl, ... }:
+  outputs = { nixpkgs, home-manager, nixgl, ... }:
   let
     # Extra Home Manager configuration for non-NixOS systems
     mkPkgs = system: import nixpkgs {
@@ -19,6 +19,28 @@
     };
     pkgs-x86     = mkPkgs "x86_64-linux";
     pkgs-aarch64 = mkPkgs "aarch64-linux";
+
+    # nixGL passes `kernel = null` to nvidia-x11, an arg nixpkgs-26.05 removed, so
+    # strip that dead line and build nixGL from the patched source
+    nixgl-x86 =
+      let
+        src = pkgs-x86.runCommand "nixgl-patched" { } ''
+          cp -r ${nixgl} $out
+          chmod -R +w $out
+          substituteInPlace $out/nixGL.nix --replace-fail "kernel = null;" ""
+        '';
+      in pkgs-x86.callPackage "${src}/nixGL.nix" { };
+
+    # nixGL's own auto-detection can't parse new open-kernel driver strings, so
+    # detect the version ourselves.
+    nvidiaVersion =
+      let
+        verFile = pkgs-x86.runCommand "nvidia-version" {
+          time = builtins.currentTime;
+          preferLocalBuild = true;
+          allowSubstitutes = false;
+        } "grep -oE '[0-9]+\\.[0-9]+(\\.[0-9]+)?' /proc/driver/nvidia/version | head -1 > $out";
+      in pkgs-x86.lib.trim (builtins.readFile verFile);
 
     mkGnome = pkgs: extraModules:
       let username = builtins.getEnv "USER";
@@ -84,8 +106,8 @@
 
     # Switch configuration with `home-manager switch --flake .#<config>`
     homeConfigurations = {
-      intel  = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLIntel  "nixGLIntel") ];
-      nvidia = mkGnome pkgs-x86     [ (nixGLKittyModule nixgl.packages.x86_64-linux.nixGLNvidia "nixGLNvidia") ];
+      intel  = mkGnome pkgs-x86 [ (nixGLKittyModule nixgl-x86.nixGLIntel "nixGLIntel") ];
+      nvidia = mkGnome pkgs-x86 [ (nixGLKittyModule (nixgl-x86.nvidiaPackages { version = nvidiaVersion; }).nixGLNvidia "nixGLNvidia") ];
       jetson = mkGnome pkgs-aarch64 [];
     };
   };
