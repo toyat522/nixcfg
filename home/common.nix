@@ -248,6 +248,8 @@
         zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
 
         source "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh"
+
+        [[ -r "''${XDG_CONFIG_HOME:-$HOME/.config}/secrets.env" ]] && source "''${XDG_CONFIG_HOME:-$HOME/.config}/secrets.env"
       ''
     ];
 

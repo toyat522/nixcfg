@@ -66,6 +66,20 @@ echo /home/<username>/.nix-profile/bin/zsh | sudo tee -a /etc/shells
 chsh -s /home/<username>/.nix-profile/bin/zsh
 ```
 
+## Secrets
+
+Secret environment variables (API keys, tokens) are kept out of the this repo. On login,
+zsh sources `~/.config/secrets.env` if it exists.
+
+Example:
+
+```
+export ANTHROPIC_API_KEY=...
+export GITHUB_TOKEN=...
+```
+
+The file is optional per host. If it is absent, login proceeds normally.
+
 ## Troubleshooting
 
 ### Enter tty from greeter
