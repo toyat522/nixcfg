@@ -11,8 +11,19 @@ let
     };
   };
 
+  # Use C-b prefix for devshell, since it is likely used inside SSH session
+  tmuxDevshellConf = pkgs.writeTextFile {
+    name = "tmux-devshell.conf";
+    text = ''
+      source-file ${./tmux/tmux.conf}
+      unbind C-a
+      set -g prefix C-b
+      bind C-b send-prefix
+    '';
+  };
+
   tmuxConfigured = pkgs.writeShellScriptBin "tmux" ''
-    exec ${pkgs.tmux}/bin/tmux -f ${./tmux/tmux.conf} "$@"
+    exec ${pkgs.tmux}/bin/tmux -L nixdevshell -f ${tmuxDevshellConf} "$@"
   '';
 
   zshRc = import ./zsh.nix { inherit pkgs; };
