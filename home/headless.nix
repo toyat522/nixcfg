@@ -5,7 +5,6 @@ pkgs: with pkgs; [
   eza
   fastfetch
   fd
-  ffmpeg
   file
   fzf
   gcc
@@ -13,8 +12,7 @@ pkgs: with pkgs; [
   gnumake
   htop
   nerd-fonts.fira-mono
-  python3
-  python3Packages.python-lsp-server
+  (python3.withPackages (ps: [ ps.python-lsp-server ps.termcolor ]))
   ripgrep
   screen
   tcpdump
