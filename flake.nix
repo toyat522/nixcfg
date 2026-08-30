@@ -104,6 +104,12 @@
       };
     };
 
+    # Enter devshell with `nix develop -c zsh`
+    devShells = {
+      x86_64-linux.default  = import ./home/devshell.nix { pkgs = pkgs-x86; };
+      aarch64-linux.default = import ./home/devshell.nix { pkgs = pkgs-aarch64; };
+    };
+
     # Switch configuration with `home-manager switch --flake .#<config>`
     homeConfigurations = {
       intel  = mkGnome pkgs-x86 [ (nixGLKittyModule nixgl-x86.nixGLIntel "nixGLIntel") ];

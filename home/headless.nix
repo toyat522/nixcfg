@@ -1,0 +1,27 @@
+pkgs: with pkgs; [
+  bat
+  clang-tools
+  cmake
+  eza
+  fastfetch
+  fd
+  ffmpeg
+  file
+  fzf
+  gcc
+  git
+  gnumake
+  htop
+  nerd-fonts.fira-mono
+  python3
+  python3Packages.python-lsp-server
+  ripgrep
+  screen
+  tcpdump
+  tmuxp
+  unzip
+  usbutils
+  yazi
+  zip
+  zoxide
+]
