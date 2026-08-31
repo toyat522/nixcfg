@@ -118,7 +118,7 @@
     settings = {
       user = {
         name = "Toya Takahashi";
-        email = "toyatakahashi522@gmail.com";
+        email = "ttakahashi@nvidia.com";
       };
       init.defaultBranch = "main";
     };
