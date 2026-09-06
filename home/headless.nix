@@ -12,6 +12,7 @@ pkgs: with pkgs; [
   gnumake
   htop
   nerd-fonts.fira-mono
+  pre-commit
   (python3.withPackages (ps: [ ps.python-lsp-server ps.termcolor ]))
   ripgrep
   screen
