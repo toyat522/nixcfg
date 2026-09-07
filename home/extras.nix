@@ -12,14 +12,10 @@ in
     claude-code
     codex
     ffmpeg
-    gimp
     imagemagick
-    libreoffice
     obsidian
-    oriedita
     remmina
     texlive.combined.scheme-medium
-    thunderbird
     vlc
   ];
 }
