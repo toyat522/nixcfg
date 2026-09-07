@@ -78,6 +78,12 @@ The file is optional per host. If it is absent, login proceeds normally.
 
 ## Usage
 
+### Update Packages
+
+```
+nix flake update
+```
+
 ### NixOS
 
 ```
