@@ -26,6 +26,13 @@ let
     exec ${pkgs.tmux}/bin/tmux -L nixdevshell -f ${tmuxDevshellConf} "$@"
   '';
 
+  hostBazel = pkgs.writeTextFile {
+    name = "host-bazel";
+    destination = "/bin/bazel";
+    executable = true;
+    text = builtins.readFile ./host-bazel.bash;
+  };
+
   zshRc = import ./zsh.nix { inherit pkgs; };
   zdotdir = pkgs.writeTextDir ".zshrc" ''
     ${zshRc.instantPrompt}
@@ -40,6 +47,9 @@ pkgs.mkShellNoCC {
   ]);
 
   shellHook = ''
+    if [ -x /bin/bash ] && [ ! -e /etc/NIXOS ]; then
+      export PATH=${hostBazel}/bin:$PATH
+    fi
     export ZDOTDIR=${zdotdir}
     export SHELL=${pkgs.zsh}/bin/zsh
     export EDITOR=nvim
