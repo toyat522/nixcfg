@@ -2,12 +2,15 @@
 
 let
   target = "x86_64-unknown-linux-musl";
-  src = builtins.fetchurl "https://github.com/openai/codex/releases/latest/download/codex-${target}.tar.gz";
+  srcs = [
+    (builtins.fetchurl "https://github.com/openai/codex/releases/latest/download/codex-${target}.tar.gz")
+    (builtins.fetchurl "https://github.com/openai/codex/releases/latest/download/codex-code-mode-host-${target}.tar.gz")
+  ];
 in
 stdenvNoCC.mkDerivation {
   pname = "codex";
   version = "latest";
-  inherit src;
+  inherit srcs;
 
   nativeBuildInputs = [ makeBinaryWrapper ];
 
@@ -17,6 +20,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     runHook preInstall
     install -Dm755 codex-${target} $out/bin/codex
+    install -Dm755 codex-code-mode-host-${target} $out/bin/codex-code-mode-host
     runHook postInstall
   '';
 
