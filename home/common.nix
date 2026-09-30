@@ -8,9 +8,13 @@
     sxiv
   ]);
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/dev/ngc-cli"
+  ];
 
   home.sessionVariables = {
+    ISAAC_ROS_WS = "/home/${config.home.username}/dev/workspaces/isaac/";
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
@@ -115,7 +119,7 @@
     settings = {
       user = {
         name = "Toya Takahashi";
-        email = "toyatakahashi522@gmail.com";
+        email = "ttakahashi@nvidia.com";
       };
       init.defaultBranch = "main";
     };
