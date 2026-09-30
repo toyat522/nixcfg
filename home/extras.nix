@@ -2,6 +2,8 @@
 
 let
   oriedita = pkgs.callPackage ./pkgs/oriedita.nix { };
+  claude-code-latest = pkgs.callPackage ./pkgs/claude-code-latest.nix { };
+  codex-latest = pkgs.callPackage ./pkgs/codex-latest.nix { };
 in
 
 {
@@ -9,15 +11,13 @@ in
 
   home.packages = with pkgs; [
     bitwarden-cli
+    claude-code-latest
+    codex-latest
     ffmpeg
-    gimp
     imagemagick
-    libreoffice
     obsidian
-    oriedita
     remmina
     texlive.combined.scheme-medium
-    thunderbird
     vlc
   ];
 }

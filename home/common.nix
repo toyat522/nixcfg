@@ -8,9 +8,13 @@
     sxiv
   ]);
 
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/dev/ngc-cli"
+  ];
 
   home.sessionVariables = {
+    ISAAC_ROS_WS = "/home/${config.home.username}/dev/workspaces/isaac/";
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
@@ -31,9 +35,9 @@
       "image/webp"             = "sxiv.desktop";
       "image/bmp"              = "sxiv.desktop";
       "image/tiff"             = "sxiv.desktop";
-      "text/html"              = "firefox.desktop";
-      "x-scheme-handler/http"  = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
+      "text/html"              = "google-chrome.desktop";
+      "x-scheme-handler/http"  = "google-chrome.desktop";
+      "x-scheme-handler/https" = "google-chrome.desktop";
     };
   };
 
@@ -115,7 +119,7 @@
     settings = {
       user = {
         name = "Toya Takahashi";
-        email = "toyatakahashi522@gmail.com";
+        email = "ttakahashi@nvidia.com";
       };
       init.defaultBranch = "main";
     };
