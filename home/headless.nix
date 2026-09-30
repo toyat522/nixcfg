@@ -8,6 +8,7 @@ pkgs: with pkgs; [
   file
   fzf
   gcc
+  gh
   git
   gnumake
   htop

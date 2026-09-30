@@ -9,8 +9,6 @@ in
 
   home.packages = with pkgs; [
     bitwarden-cli
-    claude-code
-    codex
     ffmpeg
     gimp
     imagemagick
