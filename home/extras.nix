@@ -10,14 +10,10 @@ in
   home.packages = with pkgs; [
     bitwarden-cli
     ffmpeg
-    gimp
     imagemagick
-    libreoffice
     obsidian
-    oriedita
     remmina
     texlive.combined.scheme-medium
-    thunderbird
     vlc
   ];
 }
