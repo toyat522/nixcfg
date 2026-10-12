@@ -54,6 +54,15 @@
     alias vi='nvim'
     alias vim='nvim'
 
+    # Enter the nixcfg devshell from any directory
+    nixdev() (
+      if [[ -z "$NIX_CFG" ]]; then
+        print -u2 'Set NIX_CFG to the path of your nixcfg checkout.'
+        return 1
+      fi
+      builtin cd "$NIX_CFG" && nix develop -c zsh
+    )
+
     # fzf + zoxide integration (was programs.fzf/zoxide.enableZshIntegration)
     source <(${pkgs.fzf}/bin/fzf --zsh)
     eval "$(${pkgs.zoxide}/bin/zoxide init zsh --cmd cd)"

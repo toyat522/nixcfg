@@ -109,6 +109,9 @@ nix develop -c zsh
 This will start an isolated zsh development shell which includes the custom shell configurations
 (including neovim, tmux, etc).
 
+Set `NIX_CFG` to the absolute path of your checkout (e.g. `export NIX_CFG="$HOME/src/nixcfg"`). To persist it, add that line to
+`~/.config/secrets.env`, which the zsh configuration sources. Then run `nixdev` from any directory to enter its devshell.
+
 ## Troubleshooting
 
 ### Enter tty from greeter
