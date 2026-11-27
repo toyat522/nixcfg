@@ -1,28 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.stateVersion = "26.05";
-
-  home.packages = (import ./headless.nix pkgs) ++ (with pkgs; [
-    firefox
-    sxiv
-  ]);
-
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/dev/ngc-cli"
-  ];
-
-  home.sessionVariables = {
-    ISAAC_ROS_WS = "/home/${config.home.username}/dev/workspaces/isaac/";
-    SHELL = "${pkgs.zsh}/bin/zsh";
-  };
-
-  xdg.configFile = {
-    "nvim/init.lua".source = ./nvim/init.lua;
-    "nvim/lua".source = ./nvim/lua;
-    "nvim/ftplugin".source = ./nvim/ftplugin;
-  };
+  home.packages = with pkgs; [ firefox sxiv nerd-fonts.fira-mono ];
 
   xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
@@ -61,17 +40,8 @@
     videos = "${config.home.homeDirectory}";
   };
 
-  # Start GPG agent daemon with pinentry for passphrase entry
-  services.gpg-agent = {
-    enable = true;
-    pinentry.package = pkgs.pinentry-curses;
-  };
-
   services.syncthing.enable = true;
-
   fonts.fontconfig.enable = true;
-
-  programs.home-manager.enable = true;
 
   programs.kitty = {
     enable = true;
@@ -114,45 +84,10 @@
     };
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Toya Takahashi";
-        email = "ttakahashi@nvidia.com";
-      };
-      init.defaultBranch = "main";
-    };
-  };
-
-  programs.gpg.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    plugins = import ./nvim/plugins.nix pkgs;
-  };
-
-  programs.tmux = {
-    enable = true;
-    extraConfig = builtins.readFile ./tmux/tmux.conf;
-  };
-
   programs.zathura = {
     enable = true;
     options = {
       selection-clipboard = "clipboard";
     };
   };
-
-  programs.zsh =
-    let zshRc = import ./zsh.nix { inherit pkgs; };
-    in {
-      enable = true;
-      enableCompletion = false;
-      initContent = lib.mkMerge [
-        (lib.mkOrder 500 zshRc.instantPrompt)
-        zshRc.body
-      ];
-    };
 }

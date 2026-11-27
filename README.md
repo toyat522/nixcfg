@@ -6,9 +6,9 @@ This repository contains my NixOS and Home Manager configurations that build my 
 
 ### Sway
 
-![sway](./img/sway.png)
+![sway](./assets/screenshots/sway.png)
 
-![sway_nvim](./img/sway_nvim.png)
+![sway_nvim](./assets/screenshots/sway_nvim.png)
 
 ## Setup
 
@@ -30,7 +30,7 @@ nix-shell '<home-manager>' -A install
 cp /etc/nixos/hardware-configuration.nix ./hosts/<hostname>/hardware-configuration.nix
 ```
 
-4. Populate `./hosts/<hostname>/default.nix`.
+4. Populate `default.nix` and `home.nix` in `./hosts/<hostname>/`.
 
 5. Populate `flake.nix` with a new NixOS configuration.
 
@@ -39,7 +39,7 @@ cp /etc/nixos/hardware-configuration.nix ./hosts/<hostname>/hardware-configurati
 1. Run the installation script:
 
 ```
-./install.sh
+./scripts/install.sh
 ```
 
 2. Install the packages via Nix and Home Manager:
@@ -96,18 +96,17 @@ sudo nixos-rebuild switch --flake .#<hostname>
 home-manager switch --flake .#<config> --impure
 ```
 
-> Configuration options are `intel`, `nvidia`, or `jetson` depending on the GPU type.
+> Configuration options are `work-laptop`, `intel`, `nvidia`, or `jetson`.
 
-### Creating a Devshell
+### Zsh Shell
 
-To create devshell, run the following command:
+To start the configured shell, run:
 
 ```
-nix develop -c zsh
+nix run .#zsh
 ```
 
-This will start an isolated zsh development shell which includes the custom shell configurations
-(including neovim, tmux, etc).
+This starts Zsh with the custom shell configuration, Neovim, tmux, and CLI tools.
 
 ## Troubleshooting
 

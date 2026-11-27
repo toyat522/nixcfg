@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  imports = [ ./common.nix ];
-
   home.packages = with pkgs; [
     (catppuccin-gtk.override { accents = [ "mauve" ]; variant = "mocha"; size = "standard"; })
     (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "mauve"; })
@@ -39,5 +37,18 @@
       command = "kitty";
       name = "terminal";
     };
+  };
+
+  # GNOME starts fcitx through systemd; suppress the competing desktop autostart.
+  xdg.configFile."autostart/org.fcitx.Fcitx5.desktop" = lib.mkIf config.i18n.inputMethod.enable {
+    text = ''
+      [Desktop Entry]
+      Hidden=true
+    '';
+  };
+
+  systemd.user.services.fcitx5-daemon = lib.mkIf config.i18n.inputMethod.enable {
+    Service.ExecStart = lib.mkForce
+      "${config.i18n.inputMethod.fcitx5.fcitx5-with-addons.override { addons = config.i18n.inputMethod.fcitx5.addons; }}/bin/fcitx5 --disable classicui";
   };
 }

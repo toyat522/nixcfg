@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./common.nix ];
-
   # GTK theme for GTK apps under sway
   gtk = {
     enable = true;
@@ -33,7 +31,7 @@
   };
 
   xdg.configFile = {
-    "sway/config".source = ./sway/config;
+    "sway/config".source = ./config;
 
     # polkit agent path is nix-store-specific, so we generate a small launcher
     "sway/polkit.sh" = {
@@ -52,18 +50,18 @@
       file://${config.home.homeDirectory}/dev
     '';
 
-    "bg".source = ./bg;
-    "dunst/dunstrc".source = ./sway/dunst/dunstrc;
+    "bg".source = ../../../assets/wallpapers;
+    "dunst/dunstrc".source = ./dunst/dunstrc;
 
-    "rofi/config.rasi".source = ./sway/rofi/config.rasi;
-    "rofi/rounded-common.rasi".source = ./sway/rofi/rounded-common.rasi;
+    "rofi/config.rasi".source = ./rofi/config.rasi;
+    "rofi/rounded-common.rasi".source = ./rofi/rounded-common.rasi;
 
-    "swaylock/config".source = ./sway/swaylock.conf;
+    "swaylock/config".source = ./swaylock.conf;
 
-    "waybar/config".source = ./sway/waybar/config;
-    "waybar/style.css".source = ./sway/waybar/style.css;
+    "waybar/config".source = ./waybar/config;
+    "waybar/style.css".source = ./waybar/style.css;
     "waybar/launch.sh" = {
-      source = ./sway/waybar/launch.sh;
+      source = ./waybar/launch.sh;
       executable = true;
     };
   };

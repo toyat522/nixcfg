@@ -1,20 +1,14 @@
 pkgs: with pkgs; [
   bat
-  clang-tools
-  cmake
   eza
   fastfetch
   fd
   file
   fzf
-  gcc
   gh
   git
-  gnumake
   htop
-  nerd-fonts.fira-mono
   pre-commit
-  (python3.withPackages (ps: [ ps.python-lsp-server ps.termcolor ]))
   ripgrep
   screen
   tcpdump

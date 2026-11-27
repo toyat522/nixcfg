@@ -57,4 +57,26 @@
   # Allow running ARM64 binaries through QEMU software emulation
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.binfmt.preferStaticEmulators = true;
+
+  services.tailscale.enable = true;
+
+  networking = {
+    networkmanager.enable = true;
+
+    firewall = {
+      trustedInterfaces = [ "tailscale0" ];
+
+      allowedTCPPorts = [
+        22000  # Syncthing file transfer
+      ];
+
+      allowedUDPPorts = [
+        21027  # Syncthing discovery
+        22000  # Syncthing file transfer
+        config.services.tailscale.port
+      ];
+    };
+  };
+
+  time.timeZone = "America/Los_Angeles";
 }

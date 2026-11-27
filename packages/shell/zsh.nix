@@ -1,10 +1,3 @@
-# The interactive zsh config, in ONE place. Consumed by:
-#   - home/common.nix    (via programs.zsh.initContent) for the full Home Manager setup
-#   - home/devshell.nix  (baked into an isolated ZDOTDIR) for `nix develop`
-#
-# Everything here uses shell-level expansion ($HOME, $XDG_*, env seams) rather than
-# Home Manager's `config.home.homeDirectory`, so the exact same text is correct both
-# in your real home and inside the throwaway devshell.
 { pkgs }:
 
 {
@@ -22,7 +15,7 @@
 
     # prompt
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    source ${./p10k-config}/p10k.zsh
+    source ${./p10k.zsh}
 
     # completion (was programs.zsh.enableCompletion + zsh-completions plugin)
     fpath+=(${pkgs.zsh-completions}/share/zsh/site-functions)

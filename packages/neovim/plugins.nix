@@ -1,5 +1,3 @@
-# Neovim plugin list, shared by the Home Manager config (home/common.nix) and the
-# standalone devShell (flake.nix). Kept in one place so the two never drift.
 pkgs: with pkgs.vimPlugins; [
   dracula-nvim
   lualine-nvim
