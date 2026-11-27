@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -19,6 +19,11 @@
 
   home.sessionPath = [ "$HOME/dev/ngc-cli" ];
   home.sessionVariables.ISAAC_ROS_WS = "${config.home.homeDirectory}/dev/workspaces/isaac/";
+
+  xdg.configFile."sway/config".text = lib.mkAfter ''
+    output eDP-1 scale 2 position 0 0
+    output HDMI-A-1 mode 3440x1440 scale 2 position 0 -720
+  '';
 
   home.packages = with pkgs; [
     bitwarden-cli
