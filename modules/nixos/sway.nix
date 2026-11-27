@@ -4,21 +4,7 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      autotiling
-      bluetui
-      dex
-      dunst
-      grim
-      brightnessctl
-      polkit_gnome
-      rofi
-      slurp
-      swayidle
-      swaylock-effects
-      waybar
-      wl-clipboard
-    ];
+    extraPackages = [ pkgs.swaylock-effects ];
   };
 
   # File picker, screen sharing, etc. for Wayland apps
@@ -37,19 +23,9 @@
     powerOnBoot = true;
   };
 
-  # Thunar file manager
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
+  programs.xfconf.enable = true;   # Thunar preferences service
   services.gvfs.enable = true;     # trash, remote/network mounts
   services.tumbler.enable = true;  # thumbnail generation
-
-  # Tell JRE to manage resizing itself
-  environment.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
 
   # Enable catppuccin theme SDDM greeter
   services.displayManager.sddm = {

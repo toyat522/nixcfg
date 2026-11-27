@@ -4,7 +4,7 @@
   imports = [
     ../../modules/home/terminal.nix
     ../../modules/home/desktop.nix
-    ../../modules/home/gnome.nix
+    ../../modules/home/sway
     ../../modules/home/japanese-input.nix
   ];
 

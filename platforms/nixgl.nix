@@ -29,6 +29,11 @@ let
       name = "kitty";
       paths = [
         (pkgs.writeShellScriptBin "kitty" ''
+          ${pkgs.lib.optionalString (driver == "nvidia") ''
+            if [ -n "''${WAYLAND_DISPLAY:-}" ]; then
+              export __EGL_EXTERNAL_PLATFORM_CONFIG_DIRS=${pkgs.egl-wayland}/share/egl/egl_external_platform.d
+            fi
+          ''}
           exec ${nixglPkg}/bin/${nixglBin} ${pkgs.kitty}/bin/kitty "$@"
         '')
         pkgs.kitty

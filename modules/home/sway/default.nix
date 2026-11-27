@@ -1,6 +1,32 @@
 { config, pkgs, ... }:
 
+let
+  swaylock = if config.targets.genericLinux.enable
+    then "/usr/local/bin/swaylock-effects"
+    else "swaylock";
+in
 {
+  home.packages = with pkgs; [
+    autotiling
+    bluetui
+    brightnessctl
+    dex
+    dunst
+    grim
+    rofi
+    slurp
+    swayidle
+    (thunar.override {
+      thunarPlugins = [ thunar-archive-plugin thunar-volman ];
+    })
+    waybar
+    wireplumber
+    wl-clipboard
+    xdg-user-dirs
+  ];
+
+  home.sessionVariables._JAVA_AWT_WM_NONREPARENTING = "1";
+
   # GTK theme for GTK apps under sway
   gtk = {
     enable = true;
@@ -19,11 +45,13 @@
         accent = "mauve";
       };
     };
-    cursorTheme = {
-      name = "catppuccin-mocha-dark-cursors";
-      package = pkgs.catppuccin-cursors.mochaDark;
-      size = 24;
-    };
+  };
+
+  home.pointerCursor = {
+    name = "catppuccin-mocha-dark-cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 24;
+    gtk.enable = true;
   };
 
   dconf.settings = {
@@ -31,16 +59,10 @@
   };
 
   xdg.configFile = {
-    "sway/config".source = ./config;
-
-    # polkit agent path is nix-store-specific, so we generate a small launcher
-    "sway/polkit.sh" = {
-      text = ''
-        #!/bin/sh
-        exec ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-      '';
-      executable = true;
-    };
+    "sway/config".text = builtins.replaceStrings
+      [ "@swaylock@" "@polkit@" ]
+      [ swaylock "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]
+      (builtins.readFile ./config);
 
     # Thunar sidebar directories
     "gtk-3.0/bookmarks".text = ''
@@ -60,9 +82,5 @@
 
     "waybar/config".source = ./waybar/config;
     "waybar/style.css".source = ./waybar/style.css;
-    "waybar/launch.sh" = {
-      source = ./waybar/launch.sh;
-      executable = true;
-    };
   };
 }

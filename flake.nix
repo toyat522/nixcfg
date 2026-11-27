@@ -52,6 +52,7 @@
         neovim = import ./packages/neovim { inherit pkgs; };
         tmux = import ./packages/tmux { inherit pkgs; };
         oriedita = pkgs.callPackage ./packages/oriedita.nix { };
+        swaylock-effects-source = pkgs.swaylock-effects.src;
       });
 
       apps = forAllSystems (system: {
@@ -63,7 +64,7 @@
       });
 
       homeConfigurations = {
-        work-laptop = mkHome "x86_64-linux" [ ./hosts/work-laptop/home.nix (nixGL "nvidia") ];
+        work-laptop = mkHome "x86_64-linux" [ ./hosts/work-laptop/home.nix (nixGL "intel") ];
         intel = mkHome "x86_64-linux" [ ./hosts/generic-linux/home.nix genericIdentity (nixGL "intel") ];
         nvidia = mkHome "x86_64-linux" [ ./hosts/generic-linux/home.nix genericIdentity (nixGL "nvidia") ];
         jetson = mkHome "aarch64-linux" [ ./hosts/generic-linux/home.nix genericIdentity ];

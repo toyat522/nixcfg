@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Sway (NVIDIA)
+Comment=Sway using the host NVIDIA driver
+Exec=/usr/local/bin/nixcfg-sway-session --unsupported-gpu
+TryExec=/usr/bin/sway
+Type=Application
+DesktopNames=sway

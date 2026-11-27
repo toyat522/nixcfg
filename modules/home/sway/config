@@ -18,16 +18,18 @@ input type:touchpad {
 seat * xcursor_theme catppuccin-mocha-dark-cursors 24
 
 # Export Wayland env to dbus/systemd so applets and portals work
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway PATH XDG_DATA_DIRS XCURSOR_PATH XCURSOR_THEME XCURSOR_SIZE
 
 # Policykit agent (GUI password prompts for privilege escalation)
-exec ~/.config/sway/polkit.sh
+exec @polkit@
 
 # XDG autostart
 exec dex --autostart --environment sway
 
 # Waybar
-exec_always ~/.config/waybar/launch.sh
+bar {
+  swaybar_command waybar
+}
 
 # Notifications
 exec dunst
@@ -37,8 +39,8 @@ exec fcitx5 -d --replace --disable classicui
 
 # Screen idle/lock
 exec swayidle -w \
-  timeout 300 'swaylock -f' \
-  before-sleep 'swaylock -f'
+  timeout 300 '@swaylock@ -f' \
+  before-sleep '@swaylock@ -f'
 
 # Autotiling
 exec_always autotiling
@@ -136,7 +138,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Lock screen
-bindsym $mod+ctrl+x exec swaylock -f
+bindsym $mod+ctrl+x exec @swaylock@ -f
 # Reload config
 bindsym $mod+ctrl+r reload
 # Exit sway

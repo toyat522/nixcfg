@@ -62,6 +62,16 @@ echo /home/<username>/.nix-profile/bin/zsh | sudo tee -a /etc/shells
 chsh -s /home/<username>/.nix-profile/bin/zsh
 ```
 
+### Sway on Ubuntu with NVIDIA
+
+Install Sway, its NVIDIA login entry, and the lock-screen clock:
+
+```
+./scripts/install-sway.sh
+```
+
+This requires sudo. Select **Sway (NVIDIA)** at the next login.
+
 ### Secrets
 
 Secret environment variables (API keys, tokens) are kept out of the this repo. On login,
